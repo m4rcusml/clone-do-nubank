@@ -8,7 +8,10 @@ export function TabRoutes() {
   return (
     <Tab.Navigator
       screenOptions={{
-        tabBarActiveTintColor: '#7b12da'
+        headerStyle: { backgroundColor: '#810ad0' },
+        tabBarActiveTintColor: '#810ad0',
+        headerTintColor: 'white',
+        tabBarShowLabel: false
       }}
     >
       <Tab.Screen
