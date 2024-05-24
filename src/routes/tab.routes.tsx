@@ -51,7 +51,7 @@ export function TabRoutes() {
         tabBarShowLabel: false,
         headerTintColor: 'white',
         tabBarActiveTintColor: '#810ad0',
-        headerStyle: { backgroundColor: '#810ad0' },
+        headerStyle: { backgroundColor: '#810ad0', height: 100 },
         headerRight,
         headerLeft,
         title: '',

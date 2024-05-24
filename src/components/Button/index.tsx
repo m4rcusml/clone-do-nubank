@@ -1,30 +1,52 @@
 import { IconProps } from 'phosphor-react-native';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 type Props = {
   label: string;
-  icon(props?: IconProps): React.ReactNode;
+  showOnlyBorder?: boolean;
+  buttonRight?(): React.ReactNode;
+  icon(props: IconProps): React.ReactNode;
   labelPosition?: 'inside-right' | 'outside-bottom';
+  tintColor?: string;
 }
 
 export function Button({
   label,
   icon,
+  buttonRight,
+  showOnlyBorder,
+  tintColor = 'black',
   labelPosition = 'inside-right',
 }: Props) {
   return (
     <View style={[
       styles.superContainer,
-      { alignItems: labelPosition === 'outside-bottom' ? 'center' : 'stretch' }
+      labelPosition === 'outside-bottom' && { alignItems: 'center' },
     ]}>
-      <View style={[
+      <TouchableOpacity activeOpacity={0.6} style={[
         styles.container,
-        { borderRadius: labelPosition === 'outside-bottom' ? 100 : 20 }
+        { borderRadius: labelPosition === 'outside-bottom' ? 100 : 20 },
+        { justifyContent: labelPosition === 'outside-bottom' ? 'center' : 'flex-start' },
+        showOnlyBorder && { backgroundColor: 'transparent' }
       ]}>
-        {icon && icon()}
-        {labelPosition === 'inside-right' && <Text style={styles.label}>{label}</Text>}
-      </View>
-      {labelPosition === 'outside-bottom' && <Text style={styles.label}>{label}</Text>}
+        {icon && icon({ size: 28, color: tintColor })}
+
+        {labelPosition === 'inside-right' && (
+          <Text style={[styles.label, { flex: 1, color: tintColor }]} numberOfLines={2}>
+            {label}
+          </Text>
+        )}
+
+        {labelPosition === 'inside-right' && (
+          buttonRight && buttonRight()
+        )}
+      </TouchableOpacity>
+
+      {labelPosition === 'outside-bottom' && (
+        <Text style={[styles.label, { maxWidth: 90, textAlign: 'center', color: tintColor }]} numberOfLines={2}>
+          {label}
+        </Text>
+      )}
     </View>
   )
 };
@@ -34,15 +56,16 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   container: {
+    borderWidth: 2,
+    borderColor: '#ddd',
     backgroundColor: '#ddd',
     justifyContent: 'center',
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 20,
-    gap: 20
+    padding: 18,
+    gap: 20,
   },
   label: {
     fontWeight: '500',
-    fontSize: 18
   }
 });
