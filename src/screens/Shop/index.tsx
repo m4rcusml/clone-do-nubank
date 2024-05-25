@@ -1,5 +1,7 @@
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Highlight } from '../../components/Highlight';
+import { Button2 } from '../../components/Button2';
+import { Gift } from 'phosphor-react-native';
 
 const PLAYSTATION_BANNER = 'https://cdn1.epicgames.com/offer/24cc2629b0594bf29340f6acf9816af8/EGS_HorizonForbiddenWestCompleteEdition_GuerrillaGamesNixxesSoftware_S2_1200x1600-6eeadae1c58ebaaa74b109bd26d96645'
 const NIKE_BANNER = 'https://i.pinimg.com/736x/e9/57/19/e95719b54a910cec5edc648dc8710be4.jpg'
@@ -37,6 +39,32 @@ export function Shop() {
         
         <View style={styles.section}>
           <Text style={styles.title}>Tem de tudo</Text>
+          <Button2
+            label='Shoppe'
+            description='Cupom para compras acima de R$ 40.'
+            buttonRight={() => <Text style={styles.label}>R$ 10 OFF</Text>}
+            buttonLeft={() => (
+              <Image
+                source={{ uri: 'https://tm.ibxk.com.br/2024/01/30/30032743887001.jpg' }}
+                width={64}
+                height={64}
+                borderRadius={10}
+              />
+            )}
+          />
+          <Button2
+            label='Magazine Luiza'
+            description='Para produtos vendidos e entregues Magalu.'
+            buttonRight={() => <Text style={styles.label}>xx% OFF</Text>}
+            buttonLeft={() => (
+              <Image
+                source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScjFUnIlZ9spojpwnCBOB4MnfkHsh_yCtGDX7HmOGOGA&s' }}
+                width={64}
+                height={64}
+                borderRadius={10}
+              />
+            )}
+          />
         </View>
       </ScrollView>
     </View>

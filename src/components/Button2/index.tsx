@@ -2,14 +2,18 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 type Props = {
   label: string;
+  description: string;
+  showBorderBottom?: boolean;
+  buttonLeft?(): React.ReactNode;
   buttonRight?(): React.ReactNode;
-  icon(): React.ReactNode;
 }
 
 export function Button2({
   label,
-  icon,
+  description,
+  buttonLeft,
   buttonRight,
+  showBorderBottom = false
 }: Props) {
   return (
     <View style={[
@@ -18,15 +22,20 @@ export function Button2({
       <TouchableOpacity activeOpacity={0.6} style={[
         styles.container,
       ]}>
-        {icon && icon()}
+        {buttonLeft && buttonLeft()}
 
-        <Text style={[styles.label, { flex: 1 }]}>
-          {label}
-        </Text>
+        <View style={{ flex: 1 }}>
+          <Text style={styles.label}>
+            {label}
+          </Text>
+          <Text style={styles.description}>
+            {description}
+          </Text>
+        </View>
 
         {buttonRight && buttonRight()}
       </TouchableOpacity>
-      <View style={styles.borderBottom} />
+      {showBorderBottom && <View style={styles.borderBottom} />}
     </View>
   )
 };
@@ -36,17 +45,18 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   container: {
-    borderWidth: 2,
-    borderColor: '#ddd',
-    backgroundColor: '#ddd',
     justifyContent: 'center',
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 18,
-    gap: 20,
+    paddingHorizontal: 0,
+    paddingVertical: 5,
+    gap: 15,
   },
   label: {
     fontWeight: '500',
+  },
+  description: {
+    color: '#777'
   },
   borderBottom: {
     height: 0.8,
